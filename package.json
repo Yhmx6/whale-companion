@@ -1,0 +1,14 @@
+{
+  "name": "whale-companion",
+  "version": "0.2.0",
+  "description": "上传一张照片，让一个 60cm 高的 Q 版角色出现在里面。位置、动作、表情由 AI 看着照片决定。",
+  "private": true,
+  "scripts": {
+    "start": "python -m app.server",
+    "ui": "node tools/ui_check.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}

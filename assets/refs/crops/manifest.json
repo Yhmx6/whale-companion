@@ -1,0 +1,146 @@
+{
+  "05_chibi": {
+    "source": "05-chibi-blue-maid.jpg",
+    "size": [
+      1774,
+      887
+    ],
+    "views": {
+      "front": {
+        "crop_box": [
+          10,
+          58,
+          607,
+          819
+        ],
+        "crop_size": [
+          597,
+          761
+        ],
+        "aspect": 0.7845
+      },
+      "side": {
+        "crop_box": [
+          575,
+          59,
+          1173,
+          819
+        ],
+        "crop_size": [
+          598,
+          760
+        ],
+        "aspect": 0.7868
+      },
+      "back": {
+        "crop_box": [
+          1182,
+          58,
+          1760,
+          819
+        ],
+        "crop_size": [
+          578,
+          761
+        ],
+        "aspect": 0.7595
+      }
+    }
+  },
+  "04_detailed": {
+    "source": "04-detailed-short-maid.jpg",
+    "size": [
+      1536,
+      1024
+    ],
+    "views": {
+      "front": {
+        "crop_box": [
+          37,
+          68,
+          525,
+          945
+        ],
+        "crop_size": [
+          488,
+          877
+        ],
+        "aspect": 0.5564
+      },
+      "side": {
+        "crop_box": [
+          498,
+          68,
+          1022,
+          945
+        ],
+        "crop_size": [
+          524,
+          877
+        ],
+        "aspect": 0.5975
+      },
+      "back": {
+        "crop_box": [
+          1010,
+          68,
+          1521,
+          945
+        ],
+        "crop_size": [
+          511,
+          877
+        ],
+        "aspect": 0.5827
+      }
+    }
+  },
+  "02_simple": {
+    "source": "02-simple-short-maid.jpg",
+    "size": [
+      1536,
+      1024
+    ],
+    "views": {
+      "front": {
+        "crop_box": [
+          7,
+          68,
+          499,
+          945
+        ],
+        "crop_size": [
+          492,
+          877
+        ],
+        "aspect": 0.561
+      },
+      "side": {
+        "crop_box": [
+          547,
+          68,
+          977,
+          945
+        ],
+        "crop_size": [
+          430,
+          877
+        ],
+        "aspect": 0.4903
+      },
+      "back": {
+        "crop_box": [
+          1041,
+          68,
+          1533,
+          945
+        ],
+        "crop_size": [
+          492,
+          877
+        ],
+        "aspect": 0.561
+      }
+    }
+  }
+}

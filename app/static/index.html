@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>鲸鱼娘合照</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 14c2.5-1 4-3 4-5 3 0 5 1.5 6 4 1 2.5 3 4 6 4 2 0 3.5-.8 4-2"/>
+      <path d="M19 13.5c.6-1.6 1.4-2.4 3-3-.3 1.8-.9 3.1-2.2 4"/>
+      <circle cx="8" cy="7.5" r=".9" fill="currentColor" stroke="none"/>
+    </svg>
+    <span>鲸鱼娘合照</span>
+  </div>
+  <p class="tagline">她今天陪你去过这里</p>
+  <div class="eng-pill" id="engPill">
+    <span class="dot"></span><span id="engName">Flash</span>
+    <span class="sep"></span><span id="engCost">0.12 元 / 张</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 照片 -->
+  <section class="stage">
+    <div id="drop" class="drop">
+      <input id="file" type="file" accept="image/*" hidden>
+      <div class="drop-inner">
+        <img class="drop-art" src="/assets/seat_edge_sit__5-0-flash-260915.png" alt="">
+        <div class="drop-copy">
+          <p class="drop-title">选一张照片</p>
+          <p class="drop-hint">她会以 60 cm 的比例出现在你的照片里</p>
+          <p class="drop-hint dim">点击选择，或把照片拖到这里</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvasWrap" class="canvas-wrap" hidden>
+      <div class="canvas-frame">
+        <canvas id="canvas"></canvas>
+        <div class="canvas-badge" id="canvasBadge" hidden></div>
+        <button id="reset" class="canvas-x" title="换一张照片">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 一键 -->
+  <div class="go-bar">
+    <button id="go" class="primary big" disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 3l14 9-14 9V3z"/></svg>
+      <span id="goLabel">生成</span>
+    </button>
+    <p class="go-hint" id="goHint">她该站哪、做什么表情，都交给模型判断</p>
+  </div>
+
+  <!-- 进度 -->
+  <div id="progress" class="progress" hidden>
+    <div class="steps" id="steps"></div>
+    <div class="bar"><i id="barFill"></i></div>
+    <div class="pm-row">
+      <p class="pm" id="pmText">准备中</p>
+      <span class="tick" id="pmTick">0.0s</span>
+    </div>
+  </div>
+
+  <!-- 高级 -->
+  <details class="advanced" id="adv">
+    <summary>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 6l6 6-6 6"/></svg>
+      高级选项
+      <span class="adv-note" id="advNote">默认全自动，不用动</span>
+    </summary>
+    <div class="adv-body">
+
+      <div class="field">
+        <label class="lab">渲染方式</label>
+        <div class="seg vert" id="routeSeg">
+          <button data-v="auto" class="on">
+            <span class="seg-main">全自动<em class="tag">推荐</em></span>
+            <span class="seg-sub">位置、动作、表情都由模型看照片决定 · 0.12 元 · 16~22 秒</span>
+          </button>
+          <button data-v="sprite">
+            <span class="seg-main">精确尺寸<em class="tag alt">60cm</em></span>
+            <span class="seg-sub">尺寸 100% 准 · 0 元 · 3~5 秒 · 无遮挡、表情单一</span>
+          </button>
+        </div>
+        <p class="note" id="routeNote"></p>
+      </div>
+
+      <div class="field" id="moodField">
+        <label class="lab">
+          表情
+          <button class="link" id="moodScene" title="按照片的光线、空间和有没有人挑">
+            按场景挑
+          </button>
+        </label>
+        <div class="moods" id="moodList"></div>
+        <p class="note" id="moodNote">默认随机——同一个动作多出几张，脸都不一样。</p>
+      </div>
+
+      <div class="field" id="actionField" hidden>
+        <label class="lab" for="action">
+          贴贴动作
+          <button class="link" id="autoMatch">自动匹配</button>
+        </label>
+        <div class="row"><select id="action"></select></div>
+        <p class="note" id="matchNote">点「自动匹配」，让模型看照片挑一个。</p>
+      </div>
+
+      <div class="field" id="engineField">
+        <label class="lab">引擎</label>
+        <div class="seg sm" id="engineSeg">
+          <button data-v="doubao-seedream-5-0-flash-260915" class="on">Flash · 0.12 元</button>
+          <button data-v="doubao-seedream-5-0-pro-260628">Pro · 0.30 元</button>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+</main>
+
+<section id="results" class="results"></section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

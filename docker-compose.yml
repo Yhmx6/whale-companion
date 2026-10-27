@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    image: blue-whale-photo:0.2
+    ports:
+      - "8848:8848"
+    environment:
+      # 密钥只从宿主机环境读，不写进镜像
+      ARK_API_KEY: ${ARK_API_KEY:?需要先 export ARK_API_KEY=你的方舟密钥}
+      ARK_IMAGE_MODEL: ${ARK_IMAGE_MODEL:-doubao-seedream-5-0-pro-260628}
+      ARK_VLM_MODEL: ${ARK_VLM_MODEL:-doubao-seed-2-1-lite-260915}
+      HOST: 0.0.0.0
+      PORT: "8848"
+    volumes:
+      # 产物落回宿主机，容器重建不丢图
+      - ./output/runs:/app/output/runs
+    restart: unless-stopped

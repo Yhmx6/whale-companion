@@ -1,0 +1,21 @@
+# 密钥 —— 绝不提交
+.env
+*.key
+*.pem
+
+# 产物：每次跑都会新增，仓库里不留
+output/
+*.log
+
+# 依赖
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
